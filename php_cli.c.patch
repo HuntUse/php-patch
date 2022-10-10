@@ -1,0 +1,15 @@
+--- php_cli.c	2015-12-01 14:36:28.000000000 +0100
++++ php_cli_new.c	2022-10-10 20:54:12.325444431 +0200
+@@ -1002,9 +1002,9 @@
+ 			break;
+ 		case PHP_MODE_CLI_DIRECT:
+ 			cli_register_file_handles();
+-			if (zend_eval_string_ex(exec_direct, NULL, "Command line code", 1) == FAILURE) {
+-				exit_status=254;
+-			}
++			__AFL_INIT();
++			 while (__AFL_LOOP(100000))
++			         zend_eval_string_ex(exec_direct, NULL, "Command line code", 1);
+ 			break;
+ 
+ 		case PHP_MODE_PROCESS_STDIN:
