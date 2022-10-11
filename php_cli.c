@@ -1000,12 +1000,12 @@ static int do_cli(int argc, char **argv) /* {{{ */
 				goto out;
 			}
 			break;
-		case PHP_MODE_CLI_DIRECT:
-			cli_register_file_handles();
-			__AFL_INIT();
-			 while (__AFL_LOOP(100000))
-			         zend_eval_string_ex(exec_direct, NULL, "Command line code", 1);
-			break;
+		  case PHP_MODE_CLI_DIRECT:
+                     cli_register_file_handles();
+                     __AFL_INIT();
+                     while (__AFL_LOOP(100000))
+                             zend_eval_string_ex(exec_direct, NULL, "Command line code", 1);
+                     break;
 
 		case PHP_MODE_PROCESS_STDIN:
 			{
